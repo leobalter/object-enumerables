@@ -83,26 +83,26 @@ results; // [ [ "foo", 42 ], [ "bar", 43 ] ] (same order as for loop)
 
 ### Object.keysIn( O )
 
-1. Let _obj_ be ? ToObject(O).
+1. Let _obj_ be ? ToObject(_O_).
 1. Let _nameList_ be ? EnumerableProperties(_obj_, __"key"__).
 1. Return CreateArrayFromList(_nameList_).
 
 ### Object.valuesIn( O )
 
-1. Let _obj_ be ? ToObject(O).
+1. Let _obj_ be ? ToObject(_O_).
 1. Let _nameList_ be ? EnumerableProperties(_obj_, __"value"__).
 1. Return CreateArrayFromList(_nameList_).
 
 ### Object.entriesIn( O )
 
-1. Let _obj_ be ? ToObject(O).
+1. Let _obj_ be ? ToObject(_O_).
 1. Let _nameList_ be ? EnumerableProperties(_obj_, __"key+value"__).
 1. Return CreateArrayFromList(_nameList_).
 
 ### EnumerableProperties
 
-When the abstract operation EnumerableProperties is called with Object O and
-String kind the following steps are taken:
+When the abstract operation EnumerableProperties is called with Object _O_ and
+String _kind_ the following steps are taken:
 
 1. Assert: Type(_O_) is Object.
 1. Let _iterator_ be ? EnumerateObjectProperties(_obj_).
