@@ -22,7 +22,7 @@ var iter = Object.create( iterSuper );
 iter.bar = 43;
 ```
 
-### `Object.keysIn( iter )`
+### `Object.keysIn( O )`
 
 ```js
 // Before
@@ -41,7 +41,7 @@ results; // [ "foo", "bar" ] (same order as for loop)
 
 
 
-### `Object.valuesIn( iter )`
+### `Object.valuesIn( O )`
 
 ```js
 // Before
@@ -60,7 +60,7 @@ results; // [ 42, 43 ] (same order as for loop)
 
 
 
-### `Object.entriesIn( iter )`
+### `Object.entriesIn( O )`
 
 ```js
 // Before
@@ -76,3 +76,46 @@ results; // [ [ "foo", 42 ], [ "bar", 43 ] ]
 results = Object.entriesIn( iter );
 results; // [ [ "foo", 42 ], [ "bar", 43 ] ] (same order as for loop)
 ```
+
+----
+
+## Spec
+
+### Object.keysIn( O )
+
+1. Let _obj_ be ? ToObject(O).
+1. Let _nameList_ be ? EnumerableProperties(_obj_, __"key"__).
+1. Return CreateArrayFromList(_nameList_).
+
+### Object.valuesIn( O )
+
+1. Let _obj_ be ? ToObject(O).
+1. Let _nameList_ be ? EnumerableProperties(_obj_, __"value"__).
+1. Return CreateArrayFromList(_nameList_).
+
+### Object.entriesIn( O )
+
+1. Let _obj_ be ? ToObject(O).
+1. Let _nameList_ be ? EnumerableProperties(_obj_, __"key+value"__).
+1. Return CreateArrayFromList(_nameList_).
+
+### EnumerableProperties
+
+When the abstract operation EnumerableProperties is called with Object O and
+String kind the following steps are taken:
+
+1. Assert: Type(_O_) is Object.
+1. Let _iterator_ be ? EnumerateObjectProperties(_obj_).
+1. Let _properties_ be a new empty list.
+1. Repeat
+  1. Let _next_ be ? IteratorStep(_iterator_)
+  1. If _next_ is __false__, return _properties_.
+  1. Let _nextArg_ be ? IteratorValue(_next_).
+  1. If _kind_ is __"key"__, append _nextArg_ as the last element of _properties_.
+  1. Else,
+    1. Let _value_ be ? Get(_O_, _key_).
+    1. If _kind_ is __"value"__, append _value_ to _properties_.
+    1. Else,
+      1. Assert: _kind_ is __"key+value"__.
+      1. Let _entry_ be CreateArrayFromList(« _key_, _value_ »).
+      1. Append _entry_ to _properties_.
