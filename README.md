@@ -2,13 +2,27 @@
 
 ## Rationale
 
-Following the [rationale](https://github.com/tc39/proposal-object-values-entries#rationale) in [Object.values and Object.entries](https://github.com/tc39/proposal-object-values-entries) proposal, all these methods are useful to obtain an array of keys, values, and key/value pairs (what the spec calls “entries”) from an object, for the purposes of iteration or serialization.
+Following the [rationale](https://github.com/tc39/proposal-object-values-entries#rationale)
+in [Object.values and Object.entries](https://github.com/tc39/proposal-object-values-entries)
+proposal, all these methods are useful to obtain an array of keys, values, and
+key/value pairs (what the spec calls “entries”) from an object, for the purposes
+of iteration or serialization.
 
-They are helpful for handling Map and Set objects and are also largely used on libraries like LoDash. The name follows LoDash's `_.keysIn` method and JS `Object.{keys, values, entries}`.
+They are helpful for handling `Map` and `Set` objects and are also largely used
+by libraries like Lodash. The method names are based on Lodash’s `_.keysIn`,
+`_.valuesIn`, and `_.forIn` methods, which were inspired by
+[for…in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in),
+and JS `Object.{keys, values, entries}`.
 
-The return is similar to current triplet `{keys, values, entries}` in Object, the main difference is the enumerating the properties in the prototype chain, like the `for in` loop. Object.keysIn has got an extra motivation after `Reflect.enumerate` removal, following the removal of the `[[Enumerate]]` internal method.
+The return is similar to the current triplet `{keys, values, entries}` in `Object`,
+the main difference is the enumerating the properties in the prototype chain, like
+the `for…in` loop. `Object.keysIn` has got an extra motivation after
+`Reflect.enumerate` removal, following the removal of the `[[Enumerate]]`
+internal method.
 
-With a spread use of prototypal chain in objects, the serialization of own and inherited entries is valuable. The large use adoption of LoDash methods is a good use case.
+With a spread use of prototypal chain in objects, the serialization of own and
+inherited entries is valuable. The large use adoption of Lodash methods is a
+good use case.
 
 ## Examples
 
@@ -39,8 +53,6 @@ results = Object.keysIn( iter );
 results; // [ "foo", "bar" ] (same order as for loop)
 ```
 
-
-
 ### `Object.valuesIn( O )`
 
 ```js
@@ -57,8 +69,6 @@ results; // [ 42, 43 ]
 results = Object.valuesIn( iter );
 results; // [ 42, 43 ] (same order as for loop)
 ```
-
-
 
 ### `Object.entriesIn( O )`
 
