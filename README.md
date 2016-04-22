@@ -19,6 +19,10 @@ the `for…in` loop. `Object.keysIn` has got an extra motivation after
 `Reflect.enumerate` removal, following the removal of the `[[Enumerate]]`
 internal method.
 
+The current methods are consistent with `Reflect.enumerate` and the `for…in` loop
+as it only list String-valued keys of enumerable properties, ignoring any symbol
+keys.
+
 With a spread use of prototypal chain in objects, the serialization of own and
 inherited entries is valuable. The large use adoption of Lodash methods is a
 good use case.
