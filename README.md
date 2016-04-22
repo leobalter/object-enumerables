@@ -23,9 +23,26 @@ The current methods are consistent with `Reflect.enumerate` and the `for…in` l
 as it only list String-valued keys of enumerable properties, ignoring any symbol
 keys.
 
+## Use cases
+
 With a spread use of prototypal chain in objects, the serialization of own and
 inherited entries is valuable. The large use adoption of Lodash methods is a
 good use case.
+
+jQuery's [`$.extend`](http://api.jquery.com/jQuery.extend/) and
+[`$.fn.extend`](http://api.jquery.com/jQuery.fn.extend/) and Underscore/Lodash
+[`_.extend`/`_.assignIn`](https://lodash.com/docs#assignIn) and
+[`_.defaults`](https://lodash.com/docs#defaults) iterate over own and inherited
+enumerable properties. In the case of Lodash, [`keysIn`](https://lodash.com/docs#keysIn)
+is used to get the property names to iterate over. It's also used in Underscore
+`_.functions` and Lodash's [`_.functionsIn`](https://lodash.com/docs#functionsIn).
+
+The use of `Object.valuesIn` can be mapped to the use of `values` which is used
+in library helpers like Underscore/Lodash [`includes`](https://lodash.com/docs#includes)
+for seeing if a value is in an object or [`sample`](https://lodash.com/docs#sample)
+which grabs a random value from an object.
+
+
 
 ## Examples
 
