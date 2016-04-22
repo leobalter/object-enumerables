@@ -1,4 +1,4 @@
-# Object.keysIn / Object.valuesIn / Object.entriesIn
+# Object.mapKeys / Object.mapValues / Object.mapEntries
 
 ## Rationale
 
@@ -15,7 +15,7 @@ and JS `Object.{keys, values, entries}`.
 
 The return is similar to the current triplet `{keys, values, entries}` in `Object`,
 the main difference is the enumerating the properties in the prototype chain, like
-the `for…in` loop. `Object.keysIn` has got an extra motivation after
+the `for…in` loop. `Object.mapKeys` has got an extra motivation after
 `Reflect.enumerate` removal, following the removal of the `[[Enumerate]]`
 internal method.
 
@@ -39,7 +39,7 @@ var iter = Object.create( iterSuper );
 iter.bar = 43;
 ```
 
-### `Object.keysIn( O )`
+### `Object.mapKeys( O )`
 
 ```js
 // Before
@@ -52,11 +52,11 @@ for ( let x in iter ) {
 results; // [ "foo", "bar" ]
 
 // After
-results = Object.keysIn( iter );
+results = Object.mapKeys( iter );
 results; // [ "foo", "bar" ] (same order as for loop)
 ```
 
-### `Object.valuesIn( O )`
+### `Object.mapValues( O )`
 
 ```js
 // Before
@@ -69,11 +69,11 @@ for ( let x in iter ) {
 results; // [ 42, 43 ]
 
 // After
-results = Object.valuesIn( iter );
+results = Object.mapValues( iter );
 results; // [ 42, 43 ] (same order as for loop)
 ```
 
-### `Object.entriesIn( O )`
+### `Object.mapEntries( O )`
 
 ```js
 // Before
@@ -86,7 +86,7 @@ for ( let x in iter ) {
 results; // [ [ "foo", 42 ], [ "bar", 43 ] ]
 
 // After
-results = Object.entriesIn( iter );
+results = Object.mapEntries( iter );
 results; // [ [ "foo", 42 ], [ "bar", 43 ] ] (same order as for loop)
 ```
 
@@ -94,19 +94,19 @@ results; // [ [ "foo", 42 ], [ "bar", 43 ] ] (same order as for loop)
 
 ## Spec
 
-### Object.keysIn( O )
+### Object.mapKeys( O )
 
 1. Let _obj_ be ? ToObject(_O_).
 1. Let _nameList_ be ? EnumerableProperties(_obj_, __"key"__).
 1. Return CreateArrayFromList(_nameList_).
 
-### Object.valuesIn( O )
+### Object.mapValues( O )
 
 1. Let _obj_ be ? ToObject(_O_).
 1. Let _nameList_ be ? EnumerableProperties(_obj_, __"value"__).
 1. Return CreateArrayFromList(_nameList_).
 
-### Object.entriesIn( O )
+### Object.mapEntries( O )
 
 1. Let _obj_ be ? ToObject(_O_).
 1. Let _nameList_ be ? EnumerableProperties(_obj_, __"key+value"__).
