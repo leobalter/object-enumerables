@@ -8,8 +8,7 @@ proposal, all these methods are useful to obtain an array of keys, values, and
 key/value pairs (what the spec calls “entries”) from an object, for the purposes
 of iteration or serialization.
 
-They are helpful for handling `Map` and `Set` objects and are also largely used
-by libraries like Lodash. The method names are based on Lodash’s `_.keysIn`,
+They are largely used by libraries like Lodash. The method names are based on Lodash’s `_.keysIn`,
 `_.valuesIn`, and `_.forIn` methods, which were inspired by
 [for…in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in),
 and JS `Object.{keys, values, entries}`.
