@@ -48,7 +48,12 @@ in library helpers like Underscore/Lodash [`includes`](https://lodash.com/docs#i
 for seeing if a value is in an object or [`sample`](https://lodash.com/docs#sample)
 which grabs a random value from an object.
 
+Node.js DB packages like [Mongoose](https://github.com/Automattic/mongoose) use
+some of these Lodash methods when working with data objects.
 
+Lodash's [`_.toPlainObject`](https://lodash.com/docs#toPlainObject) which
+flattens inherited properties to own properties of a new object. This is handy
+for working with `Object.assign` and `keysIn` is used to implement that.
 
 ## Examples
 
