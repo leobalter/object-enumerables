@@ -23,6 +23,12 @@ The current methods are consistent with `Reflect.enumerate` and the `for…in` l
 as it only list String-valued keys of enumerable properties, ignoring any symbol
 keys.
 
+## array vs iterator
+
+These additions are complementary to the existing `Object.keys`, `Object.values`,
+and `Object.entries`. They are basically the same methods including inherited
+String-value keys.
+
 ## Use cases
 
 With a spread use of prototypal chain in objects, the serialization of own and
