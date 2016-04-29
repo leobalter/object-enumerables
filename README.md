@@ -1,4 +1,4 @@
-# Object.keysIn / Object.valuesIn / Object.entriesIn
+# Object.enumerableKeys / Object.enumerableValues / Object.enumerableEntries
 
 ## Rationale
 
@@ -15,7 +15,7 @@ and JS `Object.{keys, values, entries}`.
 
 The return is similar to the current triplet `{keys, values, entries}` in `Object`,
 the main difference is the enumerating the properties in the prototype chain, like
-the `for…in` loop. `Object.keysIn` has got an extra motivation after
+the `for…in` loop. `Object.enumerableKeys` has got an extra motivation after
 `Reflect.enumerate` removal, following the removal of the `[[Enumerate]]`
 internal method.
 
@@ -43,7 +43,7 @@ enumerable properties. In the case of Lodash, [`keysIn`](https://lodash.com/docs
 is used to get the property names to iterate over. It's also used in Underscore
 `_.functions` and Lodash's [`_.functionsIn`](https://lodash.com/docs#functionsIn).
 
-The use of `Object.valuesIn` can be mapped to the use of `values` which is used
+The use of `Object.enumerableValues` can be mapped to the use of `values` which is used
 in library helpers like Underscore/Lodash [`includes`](https://lodash.com/docs#includes)
 for seeing if a value is in an object or [`sample`](https://lodash.com/docs#sample)
 which grabs a random value from an object.
@@ -67,7 +67,7 @@ var iter = Object.create( iterSuper );
 iter.bar = 43;
 ```
 
-### `Object.keysIn( O )`
+### `Object.enumerableKeys( O )`
 
 ```js
 // Before
@@ -80,11 +80,11 @@ for ( let x in iter ) {
 results; // [ "foo", "bar" ]
 
 // After
-results = Object.keysIn( iter );
+results = Object.enumerableKeys( iter );
 results; // [ "foo", "bar" ] (same order as for loop)
 ```
 
-### `Object.valuesIn( O )`
+### `Object.enumerableValues( O )`
 
 ```js
 // Before
@@ -97,11 +97,11 @@ for ( let x in iter ) {
 results; // [ 42, 43 ]
 
 // After
-results = Object.valuesIn( iter );
+results = Object.enumerableValues( iter );
 results; // [ 42, 43 ] (same order as for loop)
 ```
 
-### `Object.entriesIn( O )`
+### `Object.enumerableEntries( O )`
 
 ```js
 // Before
@@ -114,7 +114,7 @@ for ( let x in iter ) {
 results; // [ [ "foo", 42 ], [ "bar", 43 ] ]
 
 // After
-results = Object.entriesIn( iter );
+results = Object.enumerableEntries( iter );
 results; // [ [ "foo", 42 ], [ "bar", 43 ] ] (same order as for loop)
 ```
 
@@ -122,19 +122,19 @@ results; // [ [ "foo", 42 ], [ "bar", 43 ] ] (same order as for loop)
 
 ## Spec
 
-### Object.keysIn( O )
+### Object.enumerableKeys( O )
 
 1. Let _obj_ be ? ToObject(_O_).
 1. Let _nameList_ be ? EnumerableProperties(_obj_, __"key"__).
 1. Return CreateArrayFromList(_nameList_).
 
-### Object.valuesIn( O )
+### Object.enumerableValues( O )
 
 1. Let _obj_ be ? ToObject(_O_).
 1. Let _nameList_ be ? EnumerableProperties(_obj_, __"value"__).
 1. Return CreateArrayFromList(_nameList_).
 
-### Object.entriesIn( O )
+### Object.enumerableEntries( O )
 
 1. Let _obj_ be ? ToObject(_O_).
 1. Let _nameList_ be ? EnumerableProperties(_obj_, __"key+value"__).
